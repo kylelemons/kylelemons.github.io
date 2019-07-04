@@ -1,0 +1,58 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+a:hover {
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+h1.post-title {
+    margin-bottom: 3px;
+}
+
+.post-permalink {
+    visibility: hidden;
+}
+
+h1.post-title:hover .post-permalink {
+    visibility: visible;
+}
+
+.post-meta-container {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 20px;
+}
+
+.post-meta-container .grow {
+    flex: 1 auto;
+}
+
+.post-meta {
+    display: inline-block;
+    font-size: smaller;
+    font-style: oblique;
+}
+
+.post-meta + .post-meta {
+    margin-left: 12px;
+}
+
+.post-meta > * {
+    vertical-align: middle;
+}
+.post-meta .material-icons {
+    font-size: 11pt;
+}
+
+.archive-item > * {
+    vertical-align: middle;
+}
+
+.archive-item small {
+    font-weight: lighter;
+    font-style: oblique;
+    padding: 4px;
+}

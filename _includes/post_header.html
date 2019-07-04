@@ -1,0 +1,32 @@
+<div><small>{{ include.post.date | date: "%-d %B %Y" }}</small></div>
+<h1 class="post-title">
+    {{ include.post.title }}
+    <a class="post-permalink" href="{{ post.url }}"><i class="material-icons">link</i></a>
+</h1>
+
+<div class="post-meta-container">
+    <div class="post-meta grow">
+        <i class="material-icons">edit</i>
+        <span class="post-author">{{ include.post.author | default: site.author }}</span>
+    </div>
+
+    {% if include.post.tags %}
+    <div class="post-meta">
+        <i class="material-icons">label</i>
+        {% for category in include.post.tags %}
+        <a class="post-tag" href="{{site.baseurl}}/tags/#{{category|slugize}}">{{category}}</a>
+        {% unless forloop.last %}, &nbsp;{% endunless %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if include.post.categories %}
+    <div class="post-meta">
+        <i class="material-icons">folder</i>
+        {% for category in include.post.categories %}
+        <a class="post-category" href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+        {% unless forloop.last %}, &nbsp;{% endunless %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
