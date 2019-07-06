@@ -4,7 +4,7 @@ name: vanitypkg
 desc: Vanity package server
 import: kylelemons.net/go/vanitypkg
 vcs: git
-repo: git://github.com/kylelemons/go/vanitypkg.git
+repo: git://github.com/kylelemons/vanitypkg.git
 source: https://github.com/kylelemons/vanitypkg/blob/master/{file}#L{line}
 links:
   Source: https://github.com/kylelemons/vanitypkg

@@ -4,7 +4,7 @@ name: rx
 desc: Package version and dependency manager
 import: kylelemons.net/go/rx
 vcs: git
-repo: https://github.com/kylelemons/rx
+repo: git://github.com/kylelemons/rx.git
 source: https://github.com/kylelemons/rx/blob/master/{file}#L{line}
 links:
   Source: https://github.com/kylelemons/rx
