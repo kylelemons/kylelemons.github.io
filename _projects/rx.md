@@ -9,5 +9,5 @@ source: https://github.com/kylelemons/rx/blob/master/{file}#L{line}
 links:
   Source: https://github.com/kylelemons/rx
   Report Issue: https://github.com/kylelemons/rx/issues
-  Blog Post: http://kylelemons.net/blog/2012/04/22-rx-for-go-headaches.article
+  Blog Post: /writeup/2012/04/22/rx-for-go-headaches/
 ---
