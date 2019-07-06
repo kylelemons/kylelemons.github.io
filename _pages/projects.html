@@ -5,8 +5,7 @@ permalink: /go/
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>KyleLemons.net - Go package listing</title>
-{% for project_kv in site.data.projects -%}
-{% assign project = project_kv[1] -%}
+{% for project in site.projects -%}
 <meta name="go-import" content="{{project.import}} {{project.vcs}} {{project.repo}}" />
 {% if project.source -%}
 <meta name="go-source" content="{{project.import}} {{project.source}}" />
@@ -65,9 +64,8 @@ permalink: /go/
           Links
         </th>
       </tr>
-      {% for project_kv in site.data.projects -%}
-      {% assign short = project_kv[0] -%}
-      {% assign project = project_kv[1] -%}
+      {% for project in site.projects -%}
+      {% assign short = project.name -%}
       <tr>
         <td><a href="http://godoc.org/{{project.import}}">{{project.import}}</a></td>
         <td>{{project.desc}}</td>
@@ -100,9 +98,6 @@ permalink: /go/
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', '{{ site.google_analytics }}', 'auto');
   ga('send', 'pageview');
-  {%- if page.ga_action %}
-  ga('send', 'event', 'Package', '{{page.ga_action}}'{% if page.ga_arg %}, '{{page.ga_arg}}'{% endif %});
-  {% endif -%}
 </script>
 {% endif -%}
 </html>

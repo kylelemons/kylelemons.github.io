@@ -17,6 +17,10 @@ defaults:
       path: assets/images
     values:
       image: true
+collections:
+  projects:
+    output: true
+    permalink: /go/:name
 
 # Display / Rendering:
 timezone: America/Los_Angeles

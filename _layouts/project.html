@@ -1,0 +1,16 @@
+---
+---
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{{page.import}}</title>
+<meta name="go-import" content="{{page.import}} {{page.vcs}} {{page.repo}}" />
+{% if page.source -%}
+<meta name="go-source" content="{{page.import}} {{page.source}}" />
+{% endif -%}
+<meta http-equiv="refresh" content="0; URL=https://godoc.org/{{page.import}}" />
+<meta charset='utf-8' />
+<body>
+    Redirecting you to
+    <a href="https://godoc.org/{{page.import}}">godoc for {{page.import}}</a>...
+</body>
