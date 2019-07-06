@@ -67,13 +67,17 @@ permalink: /go/
       {% for project in site.projects -%}
       {% assign short = project.name -%}
       <tr>
-        <td><a href="http://godoc.org/{{project.import}}">{{project.import}}</a></td>
+        <td><a href="http://godoc.org/{{project.import}}"
+          {%- if site.google_analytics %}
+          onClick="ga('send', 'event', 'Package', 'Documentation', '{{short}}');"
+          {% endif -%}
+          >{{project.import}}</a></td>
         <td>{{project.desc}}</td>
         <td>
           {% if project.links -%}
           <ul class="linklist">
             {% for link_kv in project.links -%}
-            <li><a href='{{link_kv[1]}}'
+            <li><a href="{{link_kv[1]}}"
               {%- if site.google_analytics %}
               onClick="ga('send', 'event', 'Package', '{{link_kv[0]}}', '{{short}}');"
               {% endif -%}
