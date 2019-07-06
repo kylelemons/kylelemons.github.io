@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Birth of a Cluster
+created: 2015-04-04 15:24:51.684 -0700 PDT
 categories: []
 tags: [docker, containers, gke, kubernetes, cluster]
 ---

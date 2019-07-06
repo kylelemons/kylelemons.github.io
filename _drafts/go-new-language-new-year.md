@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Go: A New Language for a New Year
+created: 2015-03-28 02:02:08.948 -0700 PDT
 categories: []
 tags: [go, programming, favorite, open-source]
 ---

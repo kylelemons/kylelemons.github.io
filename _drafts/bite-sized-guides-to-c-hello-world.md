@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Bite-sized Guides to C: Hello World!
+created: 2015-03-28 02:14:15.3 -0700 PDT
 categories: []
 tags: []
 ---

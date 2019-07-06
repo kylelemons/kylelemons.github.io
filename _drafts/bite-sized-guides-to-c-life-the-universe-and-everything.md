@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Bite-sized Guides to C: Life, the Universe, and Everything
+created: 2015-03-28 02:12:52.887 -0700 PDT
 categories: []
 tags: []
 ---

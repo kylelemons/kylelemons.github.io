@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Bite-sized Guides to C: Pointers - Not Just Your Neighbor&#39;s Dog
+created: 2015-03-28 02:27:00.332 -0700 PDT
 categories: []
 tags: []
 ---

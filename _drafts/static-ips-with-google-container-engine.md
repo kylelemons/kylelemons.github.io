@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Static IPs with Google Container Engine
+created: 2015-04-03 23:16:04.43 -0700 PDT
 categories: []
 tags: []
 ---

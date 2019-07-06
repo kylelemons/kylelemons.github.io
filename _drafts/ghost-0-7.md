@@ -1,6 +1,7 @@
 ---
 layout: post
 title: You&#39;ve been upgraded to the latest version of Ghost
+created: 2016-03-20 23:15:28.628 -0700 PDT
 categories: []
 tags: []
 ---

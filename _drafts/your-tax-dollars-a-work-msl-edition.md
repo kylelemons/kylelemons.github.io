@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Your Tax Dollars at Work - MSL Edition
+created: 2015-03-28 02:08:48.006 -0700 PDT
 categories: []
 tags: [favorite, jpl, msl, robotics]
 ---

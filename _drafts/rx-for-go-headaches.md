@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rx: My prescription for your Go dependency headaches
+created: 2015-03-28 01:35:28.76 -0700 PDT
 categories: []
 tags: [go, programming, favorite]
 ---
