@@ -2,8 +2,11 @@
 layout: post
 title: Google Container Registry with Google Apps
 created: 2015-03-31 19:02:20.338 -0700 PDT
-categories: []
-tags: []
+categories: Writeup
+tags: 
+  - Google Cloud
+  - Docker
+long: true
 ---
 The [Container Registry](https://cloud.google.com/tools/container-registry/) allows you to easily push your docker images to Cloud Storage.
 
@@ -20,6 +23,8 @@ Or, for Google Apps:
 Then, you can simply
 
     ./container.sh push
+
+<!-- snip -->
 
 ## Bucket Setup
 
