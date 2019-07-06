@@ -8,9 +8,9 @@ tags:
     - Programming
 long: true
 ---
-There has been a lot of discussion on the [Go Nuts](https://groups.google.com/forum/#!forum/golang-nuts) mailing list about how to manage versioning in the nascent [http://golang.org](Go) package ecosystem.  We muttered about it at first, and then muttered about it some more when `goinstall` came about, and there has been a pretty significant uptick in discussion since the `go` tool began to take shape and the [http://golang.org/doc/go1.html](Go 1) release date approached.  In talking with other Gophers at the [http://www.meetup.com/golangsf/](GoSF) meet-up recently, there doesn't seem to be anyone who really has a good solution.
+There has been a lot of discussion on the [Go Nuts](https://groups.google.com/forum/#!forum/golang-nuts) mailing list about how to manage versioning in the nascent [Go](http://golang.org) package ecosystem.  We muttered about it at first, and then muttered about it some more when `goinstall` came about, and there has been a pretty significant uptick in discussion since the `go` tool began to take shape and the [Go 1](http://golang.org/doc/go1.html) release date approached.  In talking with other Gophers at the [GoSF](http://www.meetup.com/golangsf/) meet-up recently, there doesn't seem to be anyone who really has a good solution.
 
-TL;DR: [http://kylelemons.net/go/rx](kylelemons.net/go/rx)
+TL;DR: [kylelemons.net/go/rx](http://kylelemons.net/go/rx)
 
 ![Relevant XKCD (online package tracking)](http://imgs.xkcd.com/comics/online_package_tracking.png)
 
@@ -24,15 +24,15 @@ Before I get too far, let me first summarize the problem.
 
 When developing a Go application, you will most likely find yourself depending on another package, often written by another author.  The ease of utilizing such third-party packages with the `go` tool makes this an even likelier scenario, and it is, in fact, encouraged.  Inevitably, however, the author of some package on which you depend will make a change to his package; this could be anything from an innocuous bug fix to a large-scale API reorganization, and you are suddenly left with two choices: stick with the version you have (often by cloning it locally) or bite the bullet and update.  This is complicated by the fact that you may both directly and indirectly depend on the same package, which means that both your project and your intermediate dependency need to agree on which of the above choices to take, and in a relatively timely manner.
 
-There have been many proposals and complaints, both on- and offline, with respect to this problem.  It's not a problem that's unique to Go, either; tools like Apache's [http://maven.apache.org/](Maven), Ruby's [http://gembundler.com/](Bundler), etc all attempt to solve this problem to a greater or lesser degree.  It is such a prevalent theme in development that a term, [http://en.wikipedia.org/wiki/DLL_Hell](DLL Hell) (and the more technically correct term [http://en.wikipedia.org/wiki/Dependency_hell](dependency hell)), has come into common use to describe it.
+There have been many proposals and complaints, both on- and offline, with respect to this problem.  It's not a problem that's unique to Go, either; tools like Apache's [Maven](http://maven.apache.org/), Ruby's [Bundler](http://gembundler.com/), etc all attempt to solve this problem to a greater or lesser degree.  It is such a prevalent theme in development that a term, [DLL Hell](http://en.wikipedia.org/wiki/DLL_Hell) (and the more technically correct term [dependency hell](http://en.wikipedia.org/wiki/Dependency_hell)), has come into common use to describe it.
 
 # Strategies
 
-The most obvious thing to do is to be paranoid about package maintainers, and thus copy your dependencies into your project.  If this strategy is sufficient, I highly recommend checking out [https://github.com/kr/goven](goven), which will streamline this process (it even rewrites the imports!) for you.  I take a different tack because I am lazy and don't want to have to maintain other people's code.  I also don't think this strategy simplifies the process of pulling in new changes from upstream, because you still have to update them one at a time until/unless something breaks.
+The most obvious thing to do is to be paranoid about package maintainers, and thus copy your dependencies into your project.  If this strategy is sufficient, I highly recommend checking out [goven](https://github.com/kr/goven), which will streamline this process (it even rewrites the imports!) for you.  I take a different tack because I am lazy and don't want to have to maintain other people's code.  I also don't think this strategy simplifies the process of pulling in new changes from upstream, because you still have to update them one at a time until/unless something breaks.
 
 The next obvious thing is to specify somewhere what version you want to check out, in the source code, so that go get knows about it and can do the right thing.  This essentially boils down to something like `import "path/package/version"` (though various proposals suggest using `@rev` or similar).  This is certainly a solution, and I suspect we will see tools emerge that will download source and update it to the proper revisions as a `go get` alternative.  I didn't choose this solution because this requires rewriting import paths when you update code and it makes it difficult to ensure that there is only a single version of a library built into the same binary, which can cause problems (if there are more, the `init()` calls will run twice, for one thing).  It also doesn't help with pulling in changes: you still are taking a chance that you'll break something (sometimes without realizing it) whenever you pull from upstream.
 
-Another reasonable strategy is to version-control the entire (or at least the dependencies within) GOPATH(s).  This has the advantage that multiple developers always check out the correct versions, and branches and merges work nicely.  A very simple tool along these lines is being developed as [http://go.pkgdoc.org/github.com/davecheney/gogo](gogo), which allows you to version control your dependencies and share them between developers.  As long as your version control system doesn't mind having other version control systems' (or its own) metadata stored inside it, this will work.  The downside of this is that you are storing a lot of redundant data in your vcs, and it _still_ doesn't address the issue of how to figure out when and if you can update what packages.
+Another reasonable strategy is to version-control the entire (or at least the dependencies within) GOPATH(s).  This has the advantage that multiple developers always check out the correct versions, and branches and merges work nicely.  A very simple tool along these lines is being developed as [gogo](http://go.pkgdoc.org/github.com/davecheney/gogo), which allows you to version control your dependencies and share them between developers.  As long as your version control system doesn't mind having other version control systems' (or its own) metadata stored inside it, this will work.  The downside of this is that you are storing a lot of redundant data in your vcs, and it _still_ doesn't address the issue of how to figure out when and if you can update what packages.
 
 # Enter `rx`
 
@@ -45,7 +45,7 @@ So, since my ancient pre-goinstall build tool has been obsoleted, I figured I'd 
 - It should be able to save a "known good" set of versions for easy rollback and sharing.
 - It should be fun to use, and should not get in the way of the developer.
 
-In that vein, I have started work on [http://kylelemons.net/go/rx](rx), my prescription for your Go dependency version headaches.  It's starting to approach a few of the the requirements above already.  To whet your appetite, here are a few examples of what it can do:
+In that vein, I have started work on [rx](http://kylelemons.net/go/rx), my prescription for your Go dependency version headaches.  It's starting to approach a few of the the requirements above already.  To whet your appetite, here are a few examples of what it can do:
 
 - `rx list` will show you inter-repository dependencies
 - `rx tags` will show you the what tags are available in a repository
@@ -136,7 +136,7 @@ There is a lot of work to do, but I think it's at the point where the best feedb
 
 Your feedback, constructive criticism, and pull requests are all greatly appreciated!
 
-P.S. I'm slowly cleaning up my [http://github.com/kylelemons](many side-projects) and making sure they work with Go 1.  I'll be listing them on [http://kylelemons.net/go](kylelemons.net/go) as I do, so feel free to e-mail me or find me on IRC if you have a favorite package that you want updated.
+P.S. I'm slowly cleaning up my [many side-projects](http://github.com/kylelemons) and making sure they work with Go 1.  I'll be listing them on [kylelemons.net/go](http://kylelemons.net/go) as I do, so feel free to e-mail me or find me on IRC if you have a favorite package that you want updated.
 
 # Comments
 
