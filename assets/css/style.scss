@@ -10,6 +10,8 @@ h1.post-title {
     margin-bottom: 3px;
 }
 
+/* Post pages */
+
 .post-permalink {
     visibility: hidden;
 }
@@ -53,4 +55,23 @@ h1.post-title:hover .post-permalink {
     font-weight: lighter;
     font-style: oblique;
     padding: 4px;
+}
+
+/* Project page: */
+.linklist {
+    list-style: none;
+}
+
+.linklist, .linklist * {
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+
+.linklist li:before {
+    content: ' / ';
+}
+
+.linklist li:first-child:before {
+    content: '';
 }

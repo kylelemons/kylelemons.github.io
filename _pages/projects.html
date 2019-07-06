@@ -1,26 +1,10 @@
 ---
+layout: base
 permalink: /go/
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <title>KyleLemons.net - Go package listing</title>
-  <meta charset='utf-8' />
-  {% for project in site.projects -%}
-  <meta name="go-import" content="{{project.import}} {{project.vcs}} {{project.repo}}" />
-  {% if project.source -%}
-  <meta name="go-source" content="{{project.import}} {{project.source}}" />
-  {% endif -%}
-  {% endfor -%}
-
-  <link rel='stylesheet' type='text/css' href='/assets/bootstrap/css/bootstrap.min.css' />
-  <link rel='stylesheet' type='text/css' href='/assets/css/projects.css' />
-</head>
-<body>
-{% include top_bar.html %}
 <div class="container">
   <div class="row">
-  <div class="hero-unit">
+  <div class="jumbotron">
     <h2>Welcome</h2>
     <p>
       This is a list of the <a href="http://golang.org">Go</a> projects I've created
@@ -81,8 +65,3 @@ permalink: /go/
     </table>
   </div>
 </div>
-</body>
-{% include google_analytics.html %}
-</html>
-{{end}}
-

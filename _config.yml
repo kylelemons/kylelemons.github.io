@@ -15,6 +15,7 @@ collections:
   projects:
     output: true
     permalink: /go/:name
+excerpt_separator: "<!-- snip -->"
 
 # Display / Rendering:
 timezone: America/Los_Angeles

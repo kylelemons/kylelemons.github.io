@@ -1,9 +1,9 @@
 ---
 layout: default
-permalink: /blog/
+permalink: /
 ---
+
 {% for post in site.posts %}
-{% unless post.categories contains "Blog" %}{% continue %}{% endunless %}
 <div class="row">
     <div class="col-xs-12">
     {% include post_header.html post=post %}
