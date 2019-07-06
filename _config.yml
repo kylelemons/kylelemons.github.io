@@ -1,11 +1,5 @@
-# Minimal theme:
-#   https://github.com/pages-themes/minimal
-theme: jekyll-theme-minimal
-
 # Basic setup:
 title: Kyle Lemons
-description: Articles, guides, documentation, etc.
-logo: assets/images/logo.jpg
 google_analytics: UA-1350650-1
 
 # Directory setup:

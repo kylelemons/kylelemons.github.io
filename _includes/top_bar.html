@@ -1,0 +1,20 @@
+    <!-- top bar -->
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">KyleLemons.net</a>
+                <ul class="nav">
+                    <li
+                        {%- unless page.url contains "/go/" or page.url contains "/blog/" %} class="active"{% endunless -%}
+                        ><a href="/">Home</a></li>
+                    <li
+                        {%- if page.url contains "/blog/" %} class="active"{% endif -%}
+                        ><a href="/blog/">Blog</a></li>
+                    <li
+                        {%- if page.url contains "/go/" %} class="active"{% endif -%}
+                        ><a href="/go/">Go Projects</a></li>
+                    <li><a href="{{site.github.owner_url}}">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
