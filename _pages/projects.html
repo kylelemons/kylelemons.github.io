@@ -1,0 +1,110 @@
+---
+permalink: /go/
+---
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>KyleLemons.net - Go package listing</title>
+{% for project_kv in site.data.projects -%}
+{% assign project = project_kv[1] -%}
+<meta name="go-import" content="{{project.import}} {{project.vcs}} {{project.repo}}" />
+{% if project.source -%}
+<meta name="go-source" content="{{project.import}} {{project.source}}" />
+{% endif -%}
+{% endfor -%}
+<meta charset='utf-8' />
+
+<link rel='stylesheet' type='text/css' href='/assets/bootstrap/css/bootstrap.min.css' />
+<link rel='stylesheet' type='text/css' href='/assets/css/projects.css' />
+</head>
+<body>
+<!-- top bar -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">KyleLemons.net</a>
+      <ul class="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li class="active"><a href="/go/">Go Projects</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  <div class="hero-unit">
+    <h2>Welcome</h2>
+    <p>
+      This is a list of the <a href="http://golang.org">Go</a> projects I've created
+      that I think are ready for general consumption.
+    </p>
+    <p>
+      Most of these are hosted on <a href="https://github.com">GitHub</a>,
+      and the online documentation is provided by <a href="http://godoc.org">GoDoc.org</a>.
+    </p>
+    <p>
+      If there's something on <a href="https://github.com/kylelemons">my GitHub</a>
+      that isn't listed here, feel free to file an issue and ask whether it is ready to be included.
+    </p>
+  </div>
+  </div>
+  <div class="row">
+    <h2>Projects:</h2>
+  </div>  
+  <div class="row">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>
+          Project Documentation
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Links
+        </th>
+      </tr>
+      {% for project_kv in site.data.projects -%}
+      {% assign short = project_kv[0] -%}
+      {% assign project = project_kv[1] -%}
+      <tr>
+        <td><a href="http://godoc.org/{{project.import}}">{{project.import}}</a></td>
+        <td>{{project.desc}}</td>
+        <td>
+          {% if project.links -%}
+          <ul class="linklist">
+            {% for link_kv in project.links -%}
+            <li><a href='{{link_kv[1]}}'
+              {%- if site.google_analytics %}
+              onClick="ga('send', 'event', 'Package', '{{link_kv[0]}}', '{{short}}');"
+              {% endif -%}
+              >{{link_kv[0]}}</a></li>
+            {% endfor -%}
+          </ul>
+          {% else -%}
+          &nbsp;
+          {% endif -%}
+        </td>
+      </tr>
+      {%- endfor %}
+    </table>
+  </div>
+</div>
+</body>
+{%- if site.google_analytics %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '{{ site.google_analytics }}', 'auto');
+  ga('send', 'pageview');
+  {%- if page.ga_action %}
+  ga('send', 'event', 'Package', '{{page.ga_action}}'{% if page.ga_arg %}, '{{page.ga_arg}}'{% endif %});
+  {% endif -%}
+</script>
+{% endif -%}
+</html>
+{{end}}
+

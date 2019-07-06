@@ -6,3 +6,6 @@ _site/
 
 # Gem cache:
 .bundlecache
+
+# Local development:
+run.sh

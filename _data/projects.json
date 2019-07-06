@@ -1,0 +1,87 @@
+{
+	"rx": {
+		"name":   "rx",
+		"desc":   "Package version and dependency manager",
+		"import": "kylelemons.net/go/rx",
+		"vcs":    "git",
+        "repo":   "https://github.com/kylelemons/rx",
+        "source": "https://github.com/kylelemons/rx/blob/master/{file}#L{line}",
+		"links": {
+			"Source":       "https://github.com/kylelemons/rx",
+			"Report Issue": "https://github.com/kylelemons/rx/issues",
+			"Blog Post":    "http://kylelemons.net/blog/2012/04/22-rx-for-go-headaches.article"
+		}
+	},
+	"atom": {
+		"name":   "atom",
+		"desc":   "Atom syndication",
+		"import": "kylelemons.net/go/atom",
+		"vcs":    "git",
+		"repo":   "git://github.com/kylelemons/go/atom.git",
+		"source": "https://github.com/kylelemons/atom/blob/master/{file}#L{line}",
+		"links": {
+            "Source": "https://github.com/kylelemons/atom",
+            "Report Issue": "https://github.com/kylelemons/atom/issues"
+		}
+	},
+	"vanitypkg": {
+		"name":   "vanitypkg",
+		"desc":   "Vanity package server",
+		"import": "kylelemons.net/go/vanitypkg",
+		"vcs":    "git",
+		"repo":   "git://github.com/kylelemons/go/vanitypkg.git",
+		"source": "https://github.com/kylelemons/vanitypkg/blob/master/{file}#L{line}",
+		"links": {
+            "Source": "https://github.com/kylelemons/vanitypkg",
+            "Report Issue": "https://github.com/kylelemons/vanitypkg/issues"
+		}
+	},
+	"daemon": {
+		"name":   "daemon",
+		"desc":   "Daemon utilities",
+		"import": "kylelemons.net/go/daemon",
+		"vcs":    "git",
+		"repo":   "git://github.com/kylelemons/go/daemon.git",
+		"source": "https://github.com/kylelemons/daemon/blob/master/{file}#L{line}",
+		"links": {
+            "Source": "https://github.com/kylelemons/daemon",
+            "Report Issue": "https://github.com/kylelemons/daemon/issues"
+		}
+	},
+	"esource": {
+		"name":   "esource",
+		"desc":   "EventSource server library",
+		"import": "kylelemons.net/go/esource",
+		"vcs":    "git",
+		"repo":   "git://github.com/kylelemons/go/esource.git",
+		"source": "https://github.com/kylelemons/esource/blob/master/{file}#L{line}",
+		"links": {
+            "Source": "https://github.com/kylelemons/esource",
+            "Report Issue": "https://github.com/kylelemons/esource/issues"
+		}
+	},
+	"gofr": {
+		"name":   "gofr",
+		"desc":   "Go Frontend utilities",
+		"import": "kylelemons.net/go/gofr",
+		"vcs":    "git",
+		"repo":   "git://github.com/kylelemons/go/gofr.git",
+		"source": "https://github.com/kylelemons/gofr/blob/master/{file}#L{line}",
+		"links": {
+            "Source": "https://github.com/kylelemons/gofr",
+            "Report Issue": "https://github.com/kylelemons/gofr/issues"
+		}
+	},
+	"rest": {
+		"name":   "rest",
+		"desc":   "REST Server library",
+		"import": "kylelemons.net/go/rest",
+		"vcs":    "git",
+		"repo":   "git://github.com/kylelemons/go/rest.git",
+		"source": "https://github.com/kylelemons/rest/blob/master/{file}#L{line}",
+		"links": {
+            "Source": "https://github.com/kylelemons/rest",
+            "Report Issue": "https://github.com/kylelemons/rest/issues"
+		}
+	}
+}

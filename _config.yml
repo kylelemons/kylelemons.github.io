@@ -6,6 +6,7 @@ theme: jekyll-theme-minimal
 title: Kyle Lemons
 description: Articles, guides, documentation, etc.
 logo: assets/images/logo.jpg
+google_analytics: UA-1350650-1
 
 # Directory setup:
 permalink: pretty
@@ -30,3 +31,7 @@ strict_front_matter: true
 
 # Default author:
 author: Kyle Lemons
+
+# Plugins:
+plugins:
+- jekyll-redirect-from
