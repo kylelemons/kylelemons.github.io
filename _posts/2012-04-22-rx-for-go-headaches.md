@@ -12,7 +12,7 @@ There has been a lot of discussion on the [Go Nuts](https://groups.google.com/fo
 
 TL;DR: [kylelemons.net/go/rx](http://kylelemons.net/go/rx)
 
-![Relevant XKCD (online package tracking)](http://imgs.xkcd.com/comics/online_package_tracking.png)
+![Relevant XKCD (online package tracking)](https://imgs.xkcd.com/comics/online_package_tracking.png)
 
 _Oddly appropriate, don't you think?_
 
