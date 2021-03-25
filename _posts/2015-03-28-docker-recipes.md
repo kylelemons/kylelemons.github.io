@@ -20,7 +20,7 @@ I always like sharing what I do with other people.  That's part of what I love a
 
 One of the easiest ways to make a Dockerfile easy to customize is to build a shell script for building and running the container.  The commands you'd use are discussed [below](#startingandstopping), but here is a template for you to start:
 
-<script src="https://gist.github.com/kylelemons/faf569962ce458121dad.js"></script>
+{% gist faf569962ce458121dad %}
 
 In your READMEs, you can easily instruct your users to configure the container with simple commands like
 
