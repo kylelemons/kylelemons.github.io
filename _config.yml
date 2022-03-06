@@ -21,6 +21,9 @@ excerpt_separator: "<!-- snip -->"
 # Display / Rendering:
 timezone: America/Los_Angeles
 encoding: utf-8
+markdown: kramdown
+kramdown:
+  parse_block_html: true
 
 # Serve options:
 incremental: false

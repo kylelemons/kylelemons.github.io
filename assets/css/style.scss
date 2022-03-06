@@ -75,3 +75,16 @@ h1.post-title:hover .post-permalink {
 .linklist li:first-child:before {
     content: '';
 }
+
+/* Fix margins around lists */
+p + ul, p + ol {
+    margin: 10px 0; /* top and bottom only */
+}
+
+/* Fix details */
+details > summary:first-of-type {
+    display: list-item;
+}
+summary > p {
+    display: inline-block;
+}
