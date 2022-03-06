@@ -6,6 +6,9 @@ _site/
 
 # Gem cache:
 .bundlecache
+Gemfile.lock
 
 # Local development:
 run.sh
+.idea
+.fleet
