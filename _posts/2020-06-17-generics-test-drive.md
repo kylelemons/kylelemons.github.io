@@ -3,7 +3,9 @@ layout: post
 title: "Test driving the new Generics"
 
 categories: Blog
-tags: Generics, Go
+tags:
+  - Generics
+  - Go
 ---
 
 This is a collection of my thoughts as I examine the [latest Go generics proposal], announced in [this blog post].
