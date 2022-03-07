@@ -228,7 +228,7 @@ maintainable as possible:
   </summary>
 
   ```go
-  func TestAccessControlServer_IsMemberOfGroup(t *testing.T) {
+  func TestAccessControlClient_IsMemberOfGroup(t *testing.T) {
     // Test case helpers
     group := func(name string, members ...string) map[string][]string {
       return map[string][]string{
@@ -236,14 +236,14 @@ maintainable as possible:
       }
     }
     isInGroup := func(user, group string) *IsMemberOfGroupRequest {
-      return &IsMemberOfGroupRequest{
-        CheckType: IsMemberOfGroupRequest_DirectMembersOnly.Enum(),
+      return &pb.IsMemberOfGroupRequest{
+        CheckType: pb.IsMemberOfGroupRequest_DirectMembersOnly.Enum(),
         User:      proto.String(user),
         Group:     proto.String(group),
       }
     }
-    resp := func(result bool) *IsMemberOfGroupResponse {
-      return &IsMemberOfGroupResponse{
+    resp := func(result bool) *pb.IsMemberOfGroupResponse {
+      return &pb.IsMemberOfGroupResponse{
         UserPresent: proto.Bool(result),
       }
     }
@@ -251,8 +251,8 @@ maintainable as possible:
     tests := []struct{
       name   string
       groups map[string][]string
-      req    *IsMemberOfGroupRequest
-      resp   *IsMemberOfGroupResponse
+      req    *pb.IsMemberOfGroupRequest
+      resp   *pb.IsMemberOfGroupResponse
     }{
       {
         name:   "is_member",
@@ -270,7 +270,7 @@ maintainable as possible:
         name:   "unknown_user",
         groups: group("party_members", "garrus", "kaidan", "tali"),
         req:    isInGroup("saren", "party_members"),
-        resp:   &IsMemberOfGroupResponse{
+        resp:   &pb.IsMemberOfGroupResponse{
           UserPresent: proto.Bool(false),
           Note:        proto.String("unknown_user"),
         },
@@ -297,6 +297,117 @@ maintainable as possible:
   shared value.
 
 ## Setup Helpers
+
+The table driven test examples above primarily show off how to write test cases for purely 
+"functional" functions -- those that accept inputs and return their results, and otherwise have 
+no dependencies or side effects.
+
+In real code, however, it is much more common for a test case to require a bit more setup.
+
+A good pattern that I have found for setup helpers is `setup(*testing.T, inputs...) *Struct` for
+general construction, or `setup(*testing.T, inputs...) *testFixtures` when tests will need more than
+just the type.
+
+An example of the former to accompany the `AccessControlClient` example above:
+
+```go
+func setup(t *testing.T, groups map[string][]string) AccessControlClient {
+  t.Helper()
+
+  // Create a listener for accepting loopback connections.
+  lis, err := net.Listen("tcp", localhost:0")
+  if err != nil {
+    t.Fatalf("SETUP: Creating loopback listener: %s", err)
+  }
+  // ...and make sure we close it, since we don't need it again.
+  t.Cleanup(lis.Close)
+
+  // Create the in-process gRPC server.
+  srv := grpc.NewServer()
+  t.Cleanup(srv.Stop)
+  
+  // Spin up the fake service and serve it on the in-process server.
+  svc := rbactest.NewFakeAccessControlServer(groups)
+  svc.RegisterOn(srv)
+  go srv.Serve(lis)
+  
+  // Create a loopback connection to our fake server.
+  cconn, err := grpc.Dial(lis.Addr().String(), grpc.WithInsecure())
+  if err != nil {
+    t.Fatalf("SETUP: Creating loopback connection: %s", err)
+  }
+  return pb.NewAccessControlServerClient(cconn)
+}
+
+func TestAccessControlClient_IsMemberOfGroup(t *testing.T) {
+  // ...
+  for _, test := range tests {
+    t.Run(test.name, func(t *testing.T) {
+      client := setup(t)
+      acls, err := NewAccessControlClient(client)
+      if err != nil {
+        t.Fatalf("NewAccessControlClient failed: %s", err)
+      }
+      resp, err := acls.IsMemberOfGroup(test.req)
+      if err != nil {
+        t.Fatalf("IsMemberOfGroup(%s) failed: %s", test.req, err)
+      }
+      if diff := cmp.Diff(resp, test.wantResp, protocmp.Transform()); diff != "" {
+        t.Errorf("IsMemberOfGroup(%s) returned incorrect response: (-got +want)\n%s", diff)
+      }
+    })
+  }
+}
+```
+
+### Tips for setup helpers
+
+* **Call `t.Helper`** if you are going to be doing any logging or failing.
+
+  This causes the resulting log or failure messages to be attributed to the caller, not to the
+  helper, which is important if the test helper is used in more than one place.
+
+* **Failures should be unrelated to the code under test** for any `t.Fatalf` in the helper.
+
+  In the code above, for example, we don't call `NewAccessControlClient` (which is part of the 
+  code in the package we're testing) in the setup helper -- the setup helper is responsible only 
+  for setting up the loopback gRPC server and the fakes.  While there are `t.Fatalf` calls in the 
+  helper, they will indicate setup bugs, environment bugs, bad test cases, or other failures that 
+  are unrelated to the actual code under test.  I like to prefix this with `SETUP` to clearly 
+  communicate this in case any of these get triggered, but the setup helpers should generally be 
+  expected to not fail, even if there are bugs in the code being tested.
+
+* **Use `t.Cleanup` to simplify the API** at the call site.
+
+  If you're following the advice above, and the setup code should not fail under normal 
+  circumstances or as a result of the code under test having bugs, then requiring each caller of 
+  the setup function to check an error is not adding any value to the reader.
+
+  On the flip side, however, if you are making a helper that _can_ fail as a result of the code 
+  under test having a bug, it is **not a test setup helper** and should be treated as a validation 
+  helper instead, see below.
+
+* **Call the helper for every subtest**, don't share the fixtures across multiple test cases.
+
+  Sharing the fixture across subtests, except in the rare case where you really are testing a 
+  sequence of operations, makes it harder to understand a test failure because it requires 
+  understanding what every prior test case was doing before the one that is being considered.
+
+  Even in cases where there is no _intentional_ order dependency, sharing the fixtures can allow
+  accidental coupling to creep into the code, which can be very difficult to debug down the road.
+
+  Creating a fixture during each subtest keeps things nicely separated, and it means that you can
+  use `--test.run` to filter for subtests without messing up the state.  It also allows you to opt 
+  to make the subtests `t.Parallel` because they have fully independent fixtures.
+
+* **Use a test-local struct for fixtures** if you need more than a few return values.
+
+  If you have multiple return values (for example, if you return the fixture server as well as a 
+  client that connects to it) that are not needed by every caller, forcing them to discard them 
+  with `_` can become an exercise in tedium, especially when you need to add or remove a new 
+  return.  Instead, define a local `testFixtures` struct and make each fixture a field of that 
+  struct, and return that instead.  Now in the test, you'll see `fix.server` and `fix.client`, 
+  which is nicely self-documenting.
 
 ## Validation helpers
 
